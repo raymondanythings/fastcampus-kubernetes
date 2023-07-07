@@ -22,7 +22,7 @@ kubectl set image rs/myapp-replicaset my-app=my-app:1.0
 kubectl get rs myapp-replicaset -o wide 
 
 # Pod의 Owner 확인
-kubectl get pod <pod-name> -o jsonpath="{.metadata.ownerReferneces[0].name}"
+kubectl get pod <pod-name> -o jsonpath="{.metadata.ownerReferences[0].name}"
 
 # 실행 중인 2.0 버전의 모든 Pod Label 변경
 kubectl label pod <pod-name> app=to-be-fixed --overwrite

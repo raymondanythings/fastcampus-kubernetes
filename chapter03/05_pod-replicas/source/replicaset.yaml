@@ -5,7 +5,27 @@
 # 컨테이너 이름/포트: my-app(8080)
 # 컨테이너 레이블: app=my-app
 # 도커 이미지: yoonjeong/my-app:1.0
-
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset
+spec:
+  # modify replicas according to your case
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+        tier: backend
+    spec:
+      containers:
+      - name: my-app
+        image: yoonjeong/my-app:1.0
+        ports:
+        - containerPort: 8080
         resources:
           limits: 
             memory: "64Mi"

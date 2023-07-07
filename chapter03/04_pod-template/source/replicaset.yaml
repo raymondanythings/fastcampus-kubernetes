@@ -5,8 +5,27 @@
 # Pod 템플릿 레이블: app=my-app
 # 컨테이너 이름/포트: my-app(8080)
 # 도커 이미지: yoonjeong/my-app:1.0
-
-        resources:
-          limits: 
-            memory: "64Mi"
-            cpu: "50m"
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+        env: production
+    spec:
+      containers:
+        - image:  yoonjeong/my-app:1.0
+          name:  my-app
+          ports:
+            - containerPort: 8080
+          resources:
+            limits: 
+              memory: "64Mi"
+              cpu: "50m"

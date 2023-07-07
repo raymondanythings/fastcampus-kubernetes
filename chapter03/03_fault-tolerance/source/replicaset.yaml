@@ -6,6 +6,24 @@
 # 컨테이너 이름/포트: blue-app(8080)
 # 도커 이미지: yoonjeong/blue-app:1.0
 
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: blue-replicaset
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blue-app
+  template:
+    metadata:
+      labels:
+        app: blue-app
+    spec:
+      containers:
+      - name: blue-app
+        image: yoonjeong/blue-app:1.0
         env:
         - name: NODE_NAME
           valueFrom:
