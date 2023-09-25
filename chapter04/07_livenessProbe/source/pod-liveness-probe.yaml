@@ -20,6 +20,15 @@ spec:
     ports:
       - containerPort: 8080
     # 여기에 작성 
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8080
+      initialDelaySeconds: 60
+      periodSeconds: 5
+      successThreshold: 1
+      failureThreshold: 1
+      timeoutSeconds: 10
     resources:  
       limits:
         memory: "64Mi"
@@ -40,6 +49,15 @@ spec:
     ports:
       - containerPort: 8080
     # 여기에 작성 
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8080
+      initialDelaySeconds: 60
+      periodSeconds: 5
+      successThreshold: 1
+      failureThreshold: 1
+      timeoutSeconds: 10
     resources:  
       limits:
         memory: "64Mi"
