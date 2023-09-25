@@ -36,12 +36,19 @@ metadata:
     name: nginx
 spec:
   # 여기에 Pod에서 사용할 ConfigMap 타입 볼륨 선언
+  volumes:
+    - name:  app-config
+      configMap:
+        name: nginx-config
   containers:
   - name: nginx
     image: nginx
     ports:
       - containerPort: 80
     # 여기에 컨테이너에서 사용할 Pod 볼륨 마운트 선언 (/etc/nginx/conf.d로 마운팅)
+    volumeMounts:
+      - name:  app-config
+        mountPath: /etc/nginx/conf.d
     resources:
       limits:
         memory: "64Mi"

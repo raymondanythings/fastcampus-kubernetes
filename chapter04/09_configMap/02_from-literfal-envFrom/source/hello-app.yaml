@@ -11,6 +11,12 @@ spec:
     ports:
     - containerPort: 8080
     # 여기에 환경변수 작성 
+    envFrom:
+      - configMapRef:
+          name: greeting-config
+    env:
+      - name: GREETING
+        value: $(MESSAGE)! $(STUDENT_NAME)
     resources:
       limits:
         memory: "64Mi"

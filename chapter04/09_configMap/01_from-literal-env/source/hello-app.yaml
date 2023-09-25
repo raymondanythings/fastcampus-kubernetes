@@ -10,6 +10,19 @@ spec:
     image: yoonjeong/hello-app:1.0
     ports:
     - containerPort: 8080
+    env:
+      - name: STUDENT_NAME
+        valueFrom:
+          configMapKeyRef:
+            key: STUDENT_NAME
+            name: greeting-config
+      - name: MESSAGE
+        valueFrom:
+          configMapKeyRef:
+            key: MESSAGE
+            name: greeting-config
+      - name: GREETING
+        value: $(MESSAGE) $(STUDENT_NAME)
     # 여기에 환경변수 작성
     resources:
       limits:
