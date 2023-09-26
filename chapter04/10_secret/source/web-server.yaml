@@ -36,10 +36,13 @@ metadata:
     name: nginx
 spec:
   volumes: # Pod에서 사용할 볼륨 목록 선언 
+  - name: tls
+    secret:
+      secretName: tls-config
   - name: app-config  # 컨테이너에서 참조할 볼륨 이름
     configMap:
       name: nginx-config  # 참조할 ConfigMap 이름
-  # 여기에 Pod에서 사용할 Secret 타입 볼륨 선언
+  # 여기에 Pod에서 사용할 Secret 타입 볼륨 선언    
   containers:
   - name: nginx
     image: nginx
@@ -48,6 +51,8 @@ spec:
     volumeMounts: # 컨테이너에서 Pod 볼륨 마운트 선언
     - name: app-config  # 마운팅할 Pod 볼륨 이름
       mountPath: /etc/nginx/conf.d  # 컨테이너 안에서 마운팅할 경로
+    - name: tls
+      mountPath: /etc/nginx/tls
     # 여기에 컨테이너에서 사용할 Pod 볼륨 마운트 선언 (/etc/nginx/tls로 마운팅)
     resources:
       limits:
